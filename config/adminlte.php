@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'red',
+    'skin' => 'yellow-light',
 
     /*
     |--------------------------------------------------------------------------
@@ -118,6 +118,17 @@ return [
             'text'        => 'Principal',
             'url'         => '/',
             'icon'        => 'dashboard',
+        ],
+        'Configurações',
+        [
+            'text' => 'Perfil',
+            'url'  => '/profile',
+            'icon' => 'user',
+        ],
+        [
+            'text' => 'Configurações',
+            'url'  => '/configurations',
+            'icon' => 'cogs',
         ],
 
     ],
