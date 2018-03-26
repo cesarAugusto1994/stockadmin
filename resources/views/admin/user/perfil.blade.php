@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'StockAdmin')
 
 @section('content_header')
     <h1>Perfil</h1>
