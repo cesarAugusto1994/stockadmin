@@ -23,7 +23,7 @@ class User
 
         $data = json_decode($response, true);
 
-        //dd(json_decode($response, true));
+        dd(json_decode($response, true));
 
         $informations = new UserInformations();
         $informations->user_id = $data['id'];

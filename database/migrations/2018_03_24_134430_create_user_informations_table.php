@@ -18,18 +18,18 @@ class CreateUserInformationsTable extends Migration
             $table->integer('user_id');
             $table->string('nickname');
             $table->datetime('registration_date');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('gender');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('gender')->nullable();
             $table->string('country_id');
             $table->string('email');
-            $table->string('user_type');
+            $table->string('user_type')->nullable();
             $table->string('logo')->nullable();
-            $table->integer('points');
-            $table->string('site_id');
-            $table->string('permalink');
-            $table->string('seller_experience');
-            $table->string('secure_email');
+            $table->integer('points')->nullable();
+            $table->string('site_id')->nullable();
+            $table->string('permalink')->nullable();
+            $table->string('seller_experience')->nullable();
+            $table->string('secure_email')->nullable();
             $table->timestamps();
         });
     }
