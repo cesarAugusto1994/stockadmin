@@ -34,22 +34,23 @@ class HomeController extends Controller
 
         UserHelper::setUserInformations();
 
-        $ACCESS_TOKEN = "APP_USR-7942076642174757-032409-1c3f83ba6174ff8030f1886020de51cf-118688227";
+        $ACCESS_TOKEN = "APP_USR-2744848600091984-032520-deb883b493166e9fcc9b99c5b62117c9-118688227";
 
         $itens = "'https://api.mercadolibre.com/items";
 
-        $produtos = 'https://api.mercadolibre.com/items/MLA600190449';
+        $produto = 'https://api.mercadolibre.com/items/MLA600190449';
 
-        $site= "https://api.mercadolibre.com/sites/MLB/search?seller_id=118688227&access_token=$ACCESS_TOKEN";
+        #APP_USR-2744848600091984-032520-deb883b493166e9fcc9b99c5b62117c9-118688227
+
+        $site = "https://api.mercadolibre.com/sites/MLB/search?seller_id=118688227&access_token=$ACCESS_TOKEN";
 
         $minhainformacoes = "https://api.mercadolibre.com/users/me?access_token=$ACCESS_TOKEN";
 
-        $response = Curl::to($site )
-        ->get();
+        #$response = Curl::to($site)->get();
 
-        $data = json_decode($response, true);
+        #$data = json_decode($response, true);
 
-        dd($data);
+        #dd($data);
 
 
 
