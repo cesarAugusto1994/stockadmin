@@ -22,13 +22,13 @@
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
-              <b>Vendas</b> <a class="pull-right">1,322</a>
+              <b>Vendas</b> <a class="pull-right">0</a>
             </li>
             <li class="list-group-item">
-              <b>Compras</b> <a class="pull-right">543</a>
+              <b>Compras</b> <a class="pull-right">0</a>
             </li>
             <li class="list-group-item">
-              <b>Produtos</b> <a class="pull-right">13,287</a>
+              <b>Produtos</b> <a class="pull-right">0</a>
             </li>
           </ul>
 
