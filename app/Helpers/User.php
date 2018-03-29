@@ -81,7 +81,7 @@ class User
 
         \Mail::to($to)->send(new CadastroMail($user));
 
-        #flash("Olá " . $user->first_name . ", sejá bem vindo ao StockAdmin, para controle dos seus produtos no Mercado Livre.")->success()->important();
+        flash("Olá " . $user->first_name . ", sejá bem vindo ao StockAdmin, para controle dos seus produtos no Mercado Livre.")->success()->important();
     }
 
 }
