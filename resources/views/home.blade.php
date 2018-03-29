@@ -7,5 +7,8 @@
 @stop
 
 @section('content')
+
+    @include('flash::message')
+
     <p>Seus painéis aparecerão aqui!</p>
 @stop

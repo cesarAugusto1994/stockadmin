@@ -15,8 +15,8 @@ class CreateUserIdentificationsTable extends Migration
     {
         Schema::create('user_identification', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('number');
-            $table->string('type');
+            $table->string('number')->nullable();
+            $table->string('type')->nullable();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('user_informations');
             $table->timestamps();

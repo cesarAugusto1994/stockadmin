@@ -9,7 +9,7 @@
 @section('content')
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
 
       <!-- Profile Image -->
       <div class="box box-primary">
@@ -50,7 +50,7 @@
           <strong><i class="fa fa-user margin-r-5"></i> Identificação</strong>
 
           <p class="text-muted">
-            {{ $user->identification->type }}: {{ $user->identification->number }}
+            {{ $user->identification->type }} {{ $user->identification->number }}
           </p>
 
           <p class="text-muted">
@@ -69,8 +69,13 @@
 
           <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-          <p class="text-muted">{{ $user->address->address }}, {{ $user->address->city }},
-            {{ $user->address->state }}, {{ $user->address->zip_code }}</p>
+              <p class="text-muted">Endereço: {{ $user->address->address }}</p>
+
+              <p class="text-muted">Cidade: {{ $user->address->city }}</p>
+
+              <p class="text-muted">Estado: {{ $user->address->state }}</p>
+
+              <p class="text-muted">CEP: {{ $user->address->zip_code }}</p>
 
           <hr>
 
