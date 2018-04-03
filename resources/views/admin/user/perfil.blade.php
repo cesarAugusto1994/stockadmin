@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'StockAdmin')
 
 @section('content_header')
     <h1>Perfil</h1>
@@ -9,7 +9,7 @@
 @section('content')
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
 
       <!-- Profile Image -->
       <div class="box box-primary">
@@ -22,13 +22,13 @@
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
-              <b>Vendas</b> <a class="pull-right">1,322</a>
+              <b>Vendas</b> <a class="pull-right">0</a>
             </li>
             <li class="list-group-item">
-              <b>Compras</b> <a class="pull-right">543</a>
+              <b>Compras</b> <a class="pull-right">0</a>
             </li>
             <li class="list-group-item">
-              <b>Produtos</b> <a class="pull-right">13,287</a>
+              <b>Produtos</b> <a class="pull-right">0</a>
             </li>
           </ul>
 
@@ -50,7 +50,7 @@
           <strong><i class="fa fa-user margin-r-5"></i> Identificação</strong>
 
           <p class="text-muted">
-            {{ $user->identification->type }}: {{ $user->identification->number }}
+            {{ $user->identification->type }} {{ $user->identification->number }}
           </p>
 
           <p class="text-muted">
@@ -69,8 +69,13 @@
 
           <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-          <p class="text-muted">{{ $user->address->address }}, {{ $user->address->city }},
-            {{ $user->address->state }}, {{ $user->address->zip_code }}</p>
+              <p class="text-muted">Endereço: {{ $user->address->address }}</p>
+
+              <p class="text-muted">Cidade: {{ $user->address->city }}</p>
+
+              <p class="text-muted">Estado: {{ $user->address->state }}</p>
+
+              <p class="text-muted">CEP: {{ $user->address->zip_code }}</p>
 
           <hr>
 

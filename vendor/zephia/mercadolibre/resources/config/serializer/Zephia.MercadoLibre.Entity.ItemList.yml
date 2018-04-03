@@ -1,0 +1,7 @@
+Zephia\MercadoLibre\Entity\ItemList:
+  exclusion_policy: NONE
+  properties:
+    query:
+      type: "string"
+    seller_id:
+      type: "string"

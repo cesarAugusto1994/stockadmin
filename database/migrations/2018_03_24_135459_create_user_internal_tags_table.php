@@ -15,7 +15,7 @@ class CreateUserInternalTagsTable extends Migration
     {
         Schema::create('user_internal_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('user_informations');
             $table->timestamps();

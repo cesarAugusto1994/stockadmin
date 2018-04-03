@@ -4,75 +4,84 @@ namespace App\Helpers;
 
 use Ixudra\Curl\Facades\Curl;
 use App\Models\{ UserInformations, UserIdentification, UserInternalTags, UserPhone, UserAddress };
+use App\Mail\Usuario\Cadastro as CadastroMail;
+use Auth;
 
 class User
 {
 
     public static function setUserInformations()
     {
-        $user = UserInformations::all();
+        $user = Helper::getRegistros(UserPhone::class);
 
         if($user->isNotEmpty()) {
-          return;
+            return;
         }
 
-        $ACCESS_TOKEN = "APP_USR-7942076642174757-032409-1c3f83ba6174ff8030f1886020de51cf-118688227";
+        ##$ACCESS_TOKEN = "APP_USR-7942076642174757-032409-1c3f83ba6174ff8030f1886020de51cf-118688227";
 
-        $response = Curl::to("https://api.mercadolibre.com/users/me?access_token=$ACCESS_TOKEN")
-        ->get();
+        // Instantiate serializer with configurations.
+        $serializer = \JMS\Serializer\SerializerBuilder::create()
+           ->addMetadataDir(__DIR__ . '/../../vendor/zephia/mercadolibre/resources/config/serializer')
+           ->build();
 
-        $data = json_decode($response, true);
+        // Instantiate client.
+        $client = new \Zephia\MercadoLibre\Client\MercadoLibreClient(
+            [],
+            $serializer
+        );
 
-        //dd(json_decode($response, true));
+        $response = $client->setAccessToken(config('app.access_token_mercadolivre'))->userShowMe();
 
         $informations = new UserInformations();
-        $informations->user_id = $data['id'];
-        $informations->nickname = $data['nickname'];
-        $informations->registration_date = new \DateTime($data['registration_date']);
-        $informations->first_name = $data['first_name'];
-        $informations->last_name = $data['last_name'];
-        $informations->gender = $data['gender'];
-        $informations->country_id = $data['country_id'];
-        $informations->email = $data['email'];
-        $informations->user_type = $data['user_type'];
-        $informations->logo = $data['logo'];
-        $informations->points = $data['points'];
-        $informations->site_id = $data['site_id'];
-        $informations->permalink = $data['permalink'];
-        $informations->seller_experience = $data['seller_experience'];
-        $informations->secure_email = $data['secure_email'];
+        $informations->user_id = $response->id;
+        $informations->nickname = $response->nickname;
+        $informations->registration_date = $response->registration_date;
+        $informations->first_name = $response->first_name;
+        $informations->last_name = $response->last_name;
+        $informations->country_id = $response->country_id;
+        $informations->email = $response->email;
+        $informations->user_type = $response->user_type;
+        $informations->logo = $response->logo;
+        $informations->points = $response->points;
+        $informations->site_id = $response->site_id;
+        $informations->permalink = $response->permalink;
+        $informations->seller_experience = $response->seller_experience;
+        $informations->secure_email = $response->secure_email;
         $informations->save();
 
         $identification = new UserIdentification();
         $identification->user_id = $informations->id;
-        $identification->number = $data['identification']['number'];
-        $identification->type = $data['identification']['type'];
+        $identification->number = $response->identification->number;
+        $identification->type = $response->identification->type;
         $identification->save();
-
-        foreach($data['internal_tags'] as $item) {
-          $iternalTags = new UserInternalTags();
-          $iternalTags->user_id = $informations->id;
-          $iternalTags->name = $item;
-          $iternalTags->save();
-        }
 
         $address = new UserAddress();
         $address->user_id = $informations->id;
-        $address->address = $data['address']['address'];
-        $address->city = $data['address']['city'];
-        $address->state = $data['address']['state'];
-        $address->zip_code = $data['address']['zip_code'];
+        $address->address = $response->address->address;
+        $address->city = $response->address->city;
+        $address->state = $response->address->state;
+        $address->zip_code = $response->address->zip_code;
         $address->save();
 
         $address = new UserPhone();
         $address->user_id = $informations->id;
-        $address->area_code = $data['phone']['area_code'];
-        $address->extension = $data['phone']['extension'];
-        $address->number = $data['phone']['number'];
-        $address->verified = $data['phone']['verified'];
+        $address->area_code = $response->phone->area_code;
+        $address->extension = $response->phone->extension;
+        $address->number = $response->phone->number;
+        $address->verified = $response->phone->verified;
         $address->save();
 
 
+        $user = UserInformations::where('user_id', $response->id)->first();
+
+        $to = [
+          Auth::user()->name => Auth::user()->email,
+        ];
+
+        \Mail::to($to)->send(new CadastroMail($user));
+
+        flash("Olá " . $user->first_name . ", sejá bem vindo ao StockAdmin, para controle dos seus produtos no Mercado Livre.")->success()->important();
     }
 
 }
