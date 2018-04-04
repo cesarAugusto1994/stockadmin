@@ -19,10 +19,16 @@
               {{ csrf_field() }}
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">APP ID</label>
-
+                  <label for="app_id" class="col-sm-2 control-label">APP ID</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="app_id" id="app_id" placeholder="Informe a APP ID">
+                    <input type="text" class="form-control" required name="app_id" id="app_id" placeholder="Informe a APP ID">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="app_id" class="col-sm-2 control-label">Secret Key</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" required name="secret_key" id="secret_key" placeholder="Informe uma Secret Key">
                   </div>
                 </div>
 

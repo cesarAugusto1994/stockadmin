@@ -32,7 +32,7 @@ class HomeController extends Controller
         //$user = auth()->user();
         //Mail::to($user)->send(new AlterarSenha($user));
 
-        #UserHelper::setUserInformations();
+        UserHelper::setUserInformations();
 
 /*
         $ACCESS_TOKEN = "APP_USR-2744848600091984-032520-deb883b493166e9fcc9b99c5b62117c9-118688227";

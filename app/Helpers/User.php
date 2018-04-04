@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 use Ixudra\Curl\Facades\Curl;
-use App\Models\{ UserInformations, UserIdentification, UserInternalTags, UserPhone, UserAddress };
+use App\Models\{ UserInformations, UserIdentification, UserInternalTags, UserPhone, UserAddress, Configurations };
 use App\Mail\Usuario\Cadastro as CadastroMail;
 use Auth;
 
@@ -12,6 +12,12 @@ class User
 
     public static function setUserInformations()
     {
+        $configs = Configurations::where('user_id', \Auth::user()->id)->get()->first();
+
+        if(!$configs->access_token) {
+            return;
+        }
+
         $user = Helper::getRegistros(UserPhone::class);
 
         if($user->isNotEmpty()) {
@@ -31,7 +37,7 @@ class User
             $serializer
         );
 
-        $response = $client->setAccessToken(config('app.access_token_mercadolivre'))->userShowMe();
+        $response = $client->setAccessToken($configs->access_token)->userShowMe();
 
         $informations = new UserInformations();
         $informations->user_id = $response->id;

@@ -127,7 +127,7 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
-    'access_token_mercadolivre' => env('ACCESS_TOKEN_ML', 'APP_USR-7942076642174757-032908-1cb420eb8ae920cc4609e215012b7cb7-310068434'),
+    'access_token_ml' => env('ACCESS_TOKEN_ML', ''),
 
     'email_delivery' => env('EMAIL_DELIVERY', 'example@example.com'),
 

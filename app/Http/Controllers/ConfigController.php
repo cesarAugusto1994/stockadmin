@@ -10,6 +10,7 @@ use Ixudra\Curl\Facades\Curl;
 class ConfigController extends Controller
 {
     const URL_REQUEST_API_CODE = "https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=%d";
+    const URL_ACCESS_TOKEN = "https://api.mercadolibre.com/oauth/token?grant_type=authorization_code&client_id=%d&client_secret=%s&code=%s&redirect_uri=%s";
 
     /**
      * Display a listing of the resource.
@@ -32,6 +33,7 @@ class ConfigController extends Controller
 
         $config = Configurations::where('user_id', $request->user()->id)->get()->first();
         $config->app_id = $data['app_id'];
+        $config->secret_key = $data['secret_key'];
         $config->save();
 
         flash("Chave da aplicação adicionada com sucesso.")->success()->important();
@@ -43,18 +45,35 @@ class ConfigController extends Controller
 
     public function requestApiAccessCode(Request $request)
     {
+        $data = $request->request->all();
 
-        dd($request->request->all());
+        $config = Configurations::where('user_id', $request->user()->id)->get()->first();
+        $config->server_granted_authorization_code = $data['code'];
+        $config->save();
 
-        /*
-        $response = Curl::to(sprintf(self::URL_REQUEST_API_CODE, \Auth::user()->configurations->app_id))->get();
+        $url = sprintf(self::URL_ACCESS_TOKEN,
+        \Auth::user()->configurations->app_id,
+        \Auth::user()->configurations->secret_key,
+        \Auth::user()->configurations->server_granted_authorization_code,
+        config('app.redirect_uri')
+        );
 
-        if(!$response) {
-           flash("A Chave da aplicação esta errada.")->warning();
-           return redirect()->route('notification');
+        $response = Curl::to($url)->post();
+
+        $result = json_decode($response, true);
+
+        if(isset($result['status']) && $result['status'] == 400) {
+          flash("Informações ainda não importadas: " . $result['message'])->warning()->important();
+          return redirect()->route('home');
         }
-        */
 
+        $config = Configurations::where('user_id', $request->user()->id)->get()->first();
+        $config->access_token = $result['access_token'];
+        $config->save();
+
+        config(['app.access_token_ml' => $result['access_token']]);
+
+        return redirect()->route('home');
     }
 
     /**

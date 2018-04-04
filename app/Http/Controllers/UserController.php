@@ -56,7 +56,7 @@ class UserController extends Controller
         }
 
         return view('admin.user.perfil')
-        ->with('user', $informations->fisrt());
+        ->with('user', $informations->first());
     }
 
     /**

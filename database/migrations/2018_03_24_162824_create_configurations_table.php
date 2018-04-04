@@ -21,6 +21,7 @@ class CreateConfigurationsTable extends Migration
             $table->string('secret_key')->nullable();
             $table->string('server_granted_authorization_code')->nullable();
             $table->string('redirect_uri')->nullable();
+            $table->string('access_token')->nullable();
             $table->timestamps();
         });
     }
