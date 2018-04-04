@@ -55,7 +55,7 @@ class ConfigController extends Controller
         \Auth::user()->configurations->app_id,
         \Auth::user()->configurations->secret_key,
         \Auth::user()->configurations->server_granted_authorization_code,
-        \Auth::user()->configurations->redirect_uri,
+        \Auth::user()->configurations->redirect_uri
         );
 
         $response = Curl::to($url)->post();
