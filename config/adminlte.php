@@ -119,6 +119,11 @@ return [
             'url'         => '/',
             'icon'        => 'dashboard',
         ],
+        [
+            'text'        => 'Categorias',
+            'url'         => '/categories',
+            'icon'        => 'star',
+        ],
         'Configurações',
         [
             'text' => 'Perfil',

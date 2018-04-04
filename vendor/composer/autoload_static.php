@@ -416,8 +416,7 @@ class ComposerStaticInit737d01477f7f26453d9b362d74e92cd4
     );
 
     public static $classMap = array (
-        'App\\Configs' => __DIR__ . '/../..' . '/app/Configs.php',
-        'App\\Configurations' => __DIR__ . '/../..' . '/app/Configurations.php',
+        'App\\AppModelsCategorias' => __DIR__ . '/../..' . '/app/AppModelsCategorias.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\Helper' => __DIR__ . '/../..' . '/app/Helpers/Helper.php',
@@ -431,6 +430,7 @@ class ComposerStaticInit737d01477f7f26453d9b362d74e92cd4
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\CheckAccessCode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckAccessCode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
@@ -438,6 +438,7 @@ class ComposerStaticInit737d01477f7f26453d9b362d74e92cd4
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Mail\\AlterarSenha' => __DIR__ . '/../..' . '/app/Mail/AlterarSenha.php',
         'App\\Mail\\Usuario\\Cadastro' => __DIR__ . '/../..' . '/app/Mail/Usuario/Cadastro.php',
+        'App\\Models\\Configurations' => __DIR__ . '/../..' . '/app/Models/Configurations.php',
         'App\\Models\\UserAddress' => __DIR__ . '/../..' . '/app/Models/UserAddress.php',
         'App\\Models\\UserAlternativePhone' => __DIR__ . '/../..' . '/app/Models/UserAlternativePhone.php',
         'App\\Models\\UserBillData' => __DIR__ . '/../..' . '/app/Models/UserBillData.php',

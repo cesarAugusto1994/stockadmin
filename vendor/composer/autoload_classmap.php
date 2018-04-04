@@ -6,8 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Configs' => $baseDir . '/app/Configs.php',
-    'App\\Configurations' => $baseDir . '/app/Configurations.php',
+    'App\\AppModelsCategorias' => $baseDir . '/app/AppModelsCategorias.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Helpers\\Helper' => $baseDir . '/app/Helpers/Helper.php',
@@ -21,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
+    'App\\Http\\Middleware\\CheckAccessCode' => $baseDir . '/app/Http/Middleware/CheckAccessCode.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
@@ -28,6 +28,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Mail\\AlterarSenha' => $baseDir . '/app/Mail/AlterarSenha.php',
     'App\\Mail\\Usuario\\Cadastro' => $baseDir . '/app/Mail/Usuario/Cadastro.php',
+    'App\\Models\\Configurations' => $baseDir . '/app/Models/Configurations.php',
     'App\\Models\\UserAddress' => $baseDir . '/app/Models/UserAddress.php',
     'App\\Models\\UserAlternativePhone' => $baseDir . '/app/Models/UserAlternativePhone.php',
     'App\\Models\\UserBillData' => $baseDir . '/app/Models/UserBillData.php',

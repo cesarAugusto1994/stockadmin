@@ -23,6 +23,8 @@ Route::middleware('auth')->middleware('check_code')->group(function () {
   Route::get('/home', 'HomeController@index')->name('home');
   Route::get('/profile', 'UserController@show')->name('profile');
   Route::get('/configurations', 'ConfigController@index')->name('configs');
+
+  Route::get('/categories', 'CategoriasController@index');
 });
 
 Route::middleware('auth')->group(function () {
