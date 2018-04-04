@@ -13,10 +13,26 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
 
-Route::middleware('auth')->group(function () {
+
+Route::get('/autentication/grant-access', 'ConfigController@requestApiAccessCode')->name('request_api_acesss_code');
+
+
+
+Route::middleware('auth')->middleware('check_code')->group(function () {
+
+  Route::get('/', 'HomeController@index');
   Route::get('/home', 'HomeController@index')->name('home');
   Route::get('/profile', 'UserController@show')->name('profile');
   Route::get('/configurations', 'ConfigController@index')->name('configs');
+
+
+
+
 });
+
+  Route::post('/configurations/app_id/store', 'ConfigController@saveAppCode')->name('save_app_code');
+
+
+
+Route::get('/configurations/notification', 'ConfigController@notification')->name('notification');

@@ -48,8 +48,15 @@ class UserController extends Controller
     {
         $user = auth()->user()->id;
 
+        $informations = UserInformations::get();
+
+        if($informations->isEmpty()) {
+          flash("Informações ainda não importadas.")->warning()->important();
+          return redirect()->route('home');
+        }
+
         return view('admin.user.perfil')
-        ->with('user', UserInformations::get()->first());
+        ->with('user', $informations->fisrt());
     }
 
     /**

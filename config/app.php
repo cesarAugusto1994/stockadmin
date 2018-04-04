@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'redirect_uri' => env('REDIRECT_URI', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
