@@ -6,6 +6,7 @@ use Ixudra\Curl\Facades\Curl;
 use App\Models\{ UserInformations, UserIdentification, UserInternalTags, UserPhone, UserAddress, Configurations };
 use App\Mail\Usuario\Cadastro as CadastroMail;
 use Auth;
+use App\User as UserModel;
 
 class User
 {
@@ -14,14 +15,14 @@ class User
     {
         $configs = Configurations::where('user_id', \Auth::user()->id)->get()->first();
 
-        if(!$configs->access_token) {
-            return;
+        if($configs->access_token) {
+            #return;
         }
 
         $user = Helper::getRegistros(UserPhone::class);
 
         if($user->isNotEmpty()) {
-            return;
+            //return;
         }
 
         ##$ACCESS_TOKEN = "APP_USR-7942076642174757-032409-1c3f83ba6174ff8030f1886020de51cf-118688227";
@@ -39,8 +40,12 @@ class User
 
         $response = $client->setAccessToken($configs->access_token)->userShowMe();
 
+        $user = UserModel::find(\Auth::user()->id);
+        $user->api_id = $response->id;
+        $user->save();
+
         $informations = new UserInformations();
-        $informations->user_id = $response->id;
+        $informations->user_id = $user->id;
         $informations->nickname = $response->nickname;
         $informations->registration_date = $response->registration_date;
         $informations->first_name = $response->first_name;
@@ -57,13 +62,13 @@ class User
         $informations->save();
 
         $identification = new UserIdentification();
-        $identification->user_id = $informations->id;
+        $identification->user_id = $user->id;
         $identification->number = $response->identification->number;
         $identification->type = $response->identification->type;
         $identification->save();
 
         $address = new UserAddress();
-        $address->user_id = $informations->id;
+        $address->user_id = $user->id;
         $address->address = $response->address->address;
         $address->city = $response->address->city;
         $address->state = $response->address->state;
@@ -71,7 +76,7 @@ class User
         $address->save();
 
         $address = new UserPhone();
-        $address->user_id = $informations->id;
+        $address->user_id = $user->id;
         $address->area_code = $response->phone->area_code;
         $address->extension = $response->phone->extension;
         $address->number = $response->phone->number;
@@ -79,7 +84,7 @@ class User
         $address->save();
 
 
-        $user = UserInformations::where('user_id', $response->id)->first();
+        $user = UserInformations::where('user_id', $user->id)->first();
 
         $to = [
           Auth::user()->name => Auth::user()->email,
